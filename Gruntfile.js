@@ -333,6 +333,44 @@ grunt.registerTask( "build-index", function() {
 		Handlebars.compile( grunt.file.read( "templates/pep.hbs" ) )( data ) );
 });
 
+	grunt.loadNpmTasks("grunt-sri");
+
+	grunt.initConfig({
+		"sri": {
+			"generatejQuerySRI": {
+				"src": [ "cdn/**/*.js" ]
+			}
+
+            /*
+            ,
+
+            // Create a second manifest with custom settings
+            "janesCustomTask": {
+                "options": {
+                    "algorithms": ["sha256"],
+                    "dest": "./public/sri-directives.json",
+                    "targetProp": "payload"
+                },
+                "files": [
+                    {
+                        src: "public/css/example.css",
+                        type: "text/css",
+                        id: "cssfile1"
+                    },
+                    {
+                        src: "public/css/other.css"
+                    }
+                ]
+            }
+
+            */
+
+        }
+
+    });
+
+grunt.registerTask("default", ["sri"]);
+
 grunt.registerTask( "reload-listings", function() {
 	var done = this.async(),
 		host = "http://" + grunt.config( "wordpress" ).url,
